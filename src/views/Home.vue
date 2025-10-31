@@ -52,7 +52,7 @@
             </div>
             <h6 class="mb-0">技术栈</h6>
           </div>
-          <p class="small text-muted mt-2 text-center">MindMatch Demo · 前端原型 · Vue3 + Bootstrap + Chart.js</p>
+          <p class="small text-muted mt-2 text-center">MindMatch · 前端原型 · Vue3 + Bootstrap + Chart.js</p>
         </div>
       </div>
     </div>

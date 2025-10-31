@@ -391,5 +391,7 @@ main {
 .progress-bar {
   background: linear-gradient(90deg, var(--primary), var(--secondary));
   transition: width 0.5s ease;
+  display: block;
+  height: 100%;
 }
 </style>
