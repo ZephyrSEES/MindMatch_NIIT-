@@ -49,7 +49,7 @@ function select(t){
 function isSelected(t){ return answers[currentIndex.value]===t }
 function nextOrFinish(){
   if(currentIndex.value+1 < questions.length){ 
-    // 添加过渡动画
+  
     showSuccessAnimation.value = true
     setTimeout(() => {
       currentIndex.value++
@@ -100,7 +100,7 @@ const progress = computed(()=> Math.round((answeredCount.value / questions.lengt
       </div>
 
       <div v-if="!finished" class="quiz-content">
-        <!-- 进度条 -->
+
         <div class="mb-6">
           <div class="d-flex justify-content-between mb-2">
             <small class="text-muted font-medium">已完成 {{answeredCount}} / {{questions.length}}</small>
@@ -114,7 +114,7 @@ const progress = computed(()=> Math.round((answeredCount.value / questions.lengt
           </div>
         </div>
         
-        <!-- 问题卡片 -->
+   
         <div class="question-card card p-6 mb-6 shadow-md border-0">
           <div class="d-flex justify-content-between mb-4 align-items-center">
             <div class="question-number bg-accent/10 text-accent font-bold rounded-full w-10 h-10 flex items-center justify-center">
@@ -126,7 +126,7 @@ const progress = computed(()=> Math.round((answeredCount.value / questions.lengt
             {{currentQuestion.text}}
           </h3>
           
-          <!-- 选项网格 -->
+       
           <div class="option-grid row g-3">
             <div 
               class="col-6"
@@ -158,7 +158,7 @@ const progress = computed(()=> Math.round((answeredCount.value / questions.lengt
           </div>
         </div>
 
-        <!-- 控制按钮 -->
+
         <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
           <div class="left-controls">
             <button 
@@ -195,7 +195,7 @@ const progress = computed(()=> Math.round((answeredCount.value / questions.lengt
         </div>
       </div>
 
-      <!-- 完成页面 -->
+
       <div v-else class="completion-card text-center py-8">
         <div class="success-animation mb-6">
           <div class="check-circle w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
@@ -334,7 +334,7 @@ const progress = computed(()=> Math.round((answeredCount.value / questions.lengt
   box-shadow: 0 15px 30px rgba(114,124,245,0.25) !important;
 }
 
-/* 查看结果按钮的紫色边框效果 */
+
 .router-link[class*="bg-gradient-to-r"] {
   border: 2px solid transparent;
   transition: all 0.3s ease;

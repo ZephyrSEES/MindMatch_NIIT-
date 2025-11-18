@@ -17,12 +17,12 @@ function login() {
   if (user) {
     const userObj = { username: username.value, loggedIn: true, loginTime: new Date().toISOString() }
     localStorage.setItem('mm_user', JSON.stringify(userObj))
-    // 通知应用已登录（便于更新导航栏）
+
     window.dispatchEvent(new CustomEvent('mm-auth', { detail: { type: 'login', user: userObj } }))
     router.push('/')
     return
   }
-  // 兼容演示账号
+
   if (username.value === 'admin' && password.value === '123456') {
     const userObj = { username: username.value, loggedIn: true, loginTime: new Date().toISOString() }
     localStorage.setItem('mm_user', JSON.stringify(userObj))

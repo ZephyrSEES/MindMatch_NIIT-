@@ -1,5 +1,5 @@
 <script setup>
-/* eslint-disable no-unused-vars, vue/no-unused-vars */
+
 import { ref, computed } from 'vue'
 const idA = ref('')
 const idB = ref('')
@@ -9,7 +9,7 @@ const compat = ref(0)
 const isLoading = ref(false)
 const showResult = ref(false)
 
-// 计算属性：根据契合度获取等级和颜色
+
 const compatibilityLevel = computed(() => {
   if (compat.value >= 80) return { label: '灵魂伴侣', color: 'bg-gradient-to-r from-purple-500 to-pink-500' }
   if (compat.value >= 65) return { label: '高度契合', color: 'bg-gradient-to-r from-blue-500 to-accent' }
@@ -18,7 +18,7 @@ const compatibilityLevel = computed(() => {
   return { label: '有待磨合', color: 'bg-gradient-to-r from-amber-500 to-orange-500' }
 })
 
-// 获取历史记录列表（供提示使用）
+
 const savedTests = computed(() => {
   return JSON.parse(localStorage.getItem('mm_history') || '[]')
     .map(item => ({ id: item.id, date: new Date(item.date).toLocaleString() }))
@@ -26,7 +26,7 @@ const savedTests = computed(() => {
 })
 
 function loadFromIds() {
-  // 表单验证
+
   if (!idA.value || !idB.value) {
     showNotification('请输入两位用户的ID', 'error')
     return
@@ -34,7 +34,7 @@ function loadFromIds() {
   
   isLoading.value = true
   
-  // 模拟处理延迟以提升用户体验
+
   setTimeout(() => {
     try {
       const saved = JSON.parse(localStorage.getItem('mm_history') || '[]')
@@ -51,7 +51,7 @@ function loadFromIds() {
       profileB.value = b
       compat.value = Math.round(cosineSimilarity(Object.values(a), Object.values(b)) * 100)
       
-      // 平滑显示结果
+
       setTimeout(() => {
         showResult.value = true
         isLoading.value = false
@@ -87,7 +87,7 @@ function cosineSimilarity(v1, v2) {
   return dot / (n1 * n2)
 }
 
-// 显示通知
+
 function showNotification(message, type = 'info') {
   const notification = document.createElement('div')
   notification.className = `notification ${type}`
@@ -105,7 +105,7 @@ function showNotification(message, type = 'info') {
   }, 100)
 }
 
-// 自动填充示例ID
+
 function fillExampleId(slot) {
   const saved = JSON.parse(localStorage.getItem('mm_history') || '[]')
   if (saved.length >= 1) {
@@ -117,7 +117,7 @@ function fillExampleId(slot) {
 
 <template>
   <div class="match-container">
-    <!-- 背景装饰 -->
+
     <div class="match-decoration"></div>
     <div class="match-decoration-2"></div>
     
@@ -125,7 +125,7 @@ function fillExampleId(slot) {
       <h1 class="match-title mb-2">双人匹配分析</h1>
       <p class="match-subtitle text-muted mb-8">输入两位用户的历史记录ID，分析性格契合度和互补优势</p>
 
-      <!-- 输入表单 -->
+
       <div class="match-form">
         <div class="row gap-4 mb-6">
           <div class="col-12 col-md-6">
@@ -186,7 +186,7 @@ function fillExampleId(slot) {
           </button>
         </div>
 
-        <!-- 最近测试提示 -->
+   
         <div v-if="savedTests.length > 0" class="recent-tests mb-8">
           <h3 class="recent-tests-title text-sm font-medium text-gray-500 mb-2">最近的测试记录：</h3>
           <div class="recent-tests-list">
@@ -202,12 +202,12 @@ function fillExampleId(slot) {
         </div>
       </div>
 
-      <!-- 匹配结果 -->
+
       <div 
         v-if="showResult && profileA && profileB" 
         class="match-results"
       >
-        <!-- 契合度展示 -->
+
         <div class="compatibility-card card p-6 shadow-md border-0 bg-white rounded-xl mb-8 transform-on-hover">
           <div class="compatibility-header text-center mb-6">
             <h2 class="compatibility-title text-2xl font-bold mb-3">性格契合度分析</h2>
@@ -239,7 +239,7 @@ function fillExampleId(slot) {
           </p>
         </div>
 
-        <!-- 维度对比 -->
+
         <div class="dimensions-comparison">
           <h3 class="comparison-title text-lg font-semibold mb-4">维度详细对比</h3>
           
@@ -269,7 +269,7 @@ function fillExampleId(slot) {
                 ></div>
               </div>
               
-              <!-- 差异分析 -->
+
               <div class="comparison-analysis text-xs text-gray-500">
                 {{ getDimensionAnalysis(dimension, profileA[dimension], profileB[dimension]) }}
               </div>
@@ -360,7 +360,7 @@ export default {
   font-size: 1.1rem;
 }
 
-/* 输入框样式 */
+
 .match-input {
   border-radius: 0.5rem;
   border: 2px solid #e2e8f0;
@@ -375,13 +375,13 @@ export default {
   outline: none;
 }
 
-/* 按钮悬停效果 */
+
 .shadow-hover:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important;
 }
 
-/* 小加载动画 */
+
 .loading-spinner-small {
   display: inline-block;
   width: 16px;
@@ -396,7 +396,7 @@ export default {
   to { transform: rotate(360deg); }
 }
 
-/* 最近测试记录 */
+
 .recent-tests {
   background-color: #f8fafc;
   border-radius: 0.5rem;
@@ -411,7 +411,7 @@ export default {
   background-color: rgba(114,124,245,0.05);
 }
 
-/* 匹配结果 */
+
 .match-results {
   animation: fadeInUp 0.5s ease-out;
   display: flex;
@@ -433,7 +433,7 @@ export default {
   }
 }
 
-/* 契合度卡片 */
+
 .compatibility-card {
   box-shadow: 0 10px 30px rgba(0,0,0,0.05);
   width: 100%;
@@ -474,14 +474,14 @@ export default {
   opacity: 0.9;
 }
 
-/* 维度对比 */
+
 .dimensions-comparison {
   width: 100%;
   max-width: 800px;
   margin: 2rem 0;
 }
 
-/* 优化比较项目样式 */
+
 .comparison-title {
   text-align: center;
   margin-bottom: 2rem;
@@ -550,7 +550,7 @@ export default {
   top: 0;
 }
 
-/* 通知样式 */
+
 :global(.notification) {
   position: fixed;
   top: 20px;
@@ -583,7 +583,7 @@ export default {
   transform: translateY(0);
 }
 
-/* 响应式设计 */
+
 @media (max-width: 768px) {
   .match-container {
     padding: 1rem 0;

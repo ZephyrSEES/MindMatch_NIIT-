@@ -17,7 +17,7 @@ function register(){
   localStorage.setItem('mm_users', JSON.stringify(users))
   const userObj = { username: username.value, loggedIn: true, loginTime: new Date().toISOString() }
   localStorage.setItem('mm_user', JSON.stringify(userObj))
-  // 通知应用已登录
+
   window.dispatchEvent(new CustomEvent('mm-auth', { detail: { type: 'login', user: userObj } }))
   router.push('/')
 }

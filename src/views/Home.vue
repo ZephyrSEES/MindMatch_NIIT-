@@ -1,6 +1,6 @@
 <template>
   <div class="home-container">
-    <!-- 装饰元素 -->
+
     <div class="home-decoration"></div>
     <div class="home-decoration-2"></div>
     

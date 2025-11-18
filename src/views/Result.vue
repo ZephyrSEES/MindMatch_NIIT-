@@ -11,14 +11,14 @@ const description = ref('')
 const chart = ref(null)
 const isLoading = ref(true)
 
-// 计算属性：排序后的性格维度
+
 const sortedProfile = computed(() => {
   return Object.entries(profile.value)
     .sort((a, b) => b[1] - a[1])
     .map(([key, value]) => ({ key, value }))
 })
 
-// 计算属性：获取主要性格类型的颜色
+
 const getTypeColor = (type) => {
   const colors = {
     Analytical: 'var(--primary)',
@@ -31,7 +31,7 @@ const getTypeColor = (type) => {
 
 onMounted(async () => {
   try {
-    // 模拟加载延迟，增强用户体验
+
     await new Promise(resolve => setTimeout(resolve, 300))
     
     const id = route.params.id
@@ -41,7 +41,7 @@ onMounted(async () => {
     if (entry) {
       profile.value = entry.profile
     } else {
-      // 如果没有测试数据，使用默认数据确保雷达图能显示
+     
       profile.value = {
         Analytical: 5,
         Social: 6,
@@ -53,14 +53,14 @@ onMounted(async () => {
     
     computeLabel()
     
-    // 添加延迟让DOM完全渲染
+  
     setTimeout(() => {
       drawChart()
       isLoading.value = false
     }, 100)
   } catch (error) {
     console.error('加载结果失败:', error)
-    // 即使出错也使用默认数据
+   
     profile.value = {
       Analytical: 5,
       Social: 6,
@@ -96,12 +96,12 @@ function computeLabel(){
 }
 
 function drawChart(){
-  // 使用nextTick确保DOM完全渲染后再获取canvas元素
+
   nextTick(() => {
     const canvas = document.getElementById('radarChart')
     if(!canvas) {
       console.error('雷达图canvas元素未找到')
-      // 延迟重试
+
       setTimeout(drawChart, 500)
       return
     }
@@ -115,7 +115,7 @@ function drawChart(){
     const labels = Object.keys(profile.value)
     const data = Object.values(profile.value)
     
-    // 检查数据是否有效
+
     if (!labels.length || !data.length) {
       console.error('雷达图数据为空', { labels, data, profile: profile.value })
       return
@@ -123,13 +123,13 @@ function drawChart(){
     
     console.log('绘制雷达图', { labels, data })
     
-    // 生成渐变色 - 使用红色作为底色
+
     const gradient = ctx.createLinearGradient(0, 0, 0, 300)
-    gradient.addColorStop(0, '#ff444433') // 红色半透明
-    gradient.addColorStop(0.5, '#ff444466') // 红色更明显
-    gradient.addColorStop(1, '#ff444400') // 红色透明
+    gradient.addColorStop(0, '#ff444433') 
+    gradient.addColorStop(0.5, '#ff444466')
+    gradient.addColorStop(1, '#ff444400') 
     
-    // 销毁已存在的图表实例
+
     if (chart.value) {
       chart.value.destroy()
     }
@@ -143,9 +143,9 @@ function drawChart(){
           data,
           fill: true,
           backgroundColor: gradient,
-          borderColor: '#ff4444', // 红色边框
+          borderColor: '#ff4444', 
           borderWidth: 3,
-          pointBackgroundColor: '#ff4444', // 红色点
+          pointBackgroundColor: '#ff4444',
           pointBorderColor: '#fff',
           pointHoverBackgroundColor: '#fff',
           pointHoverBorderColor: '#ff4444',
@@ -173,23 +173,23 @@ function drawChart(){
           r: {
             beginAtZero: true,
             suggestedMax: 8,
-            backgroundColor: '#fff5f5', // 浅红色背景
+            backgroundColor: '#fff5f5', 
             grid: {
-              color: 'rgba(255, 68, 68, 0.1)' // 红色网格线
+              color: 'rgba(255, 68, 68, 0.1)' 
             },
             angleLines: {
-              color: 'rgba(255, 68, 68, 0.2)' // 红色角度线
+              color: 'rgba(255, 68, 68, 0.2)' 
             },
             pointLabels: {
               font: {
                 size: 13,
                 weight: '500'
               },
-              color: '#ff4444' // 红色标签文字
+              color: '#ff4444' 
             },
             ticks: {
               backdropColor: 'transparent',
-              color: '#ff4444' // 红色刻度文字
+              color: '#ff4444' 
             }
           }
         },
@@ -219,7 +219,7 @@ function downloadImage(){
   a.click()
   document.body.removeChild(a)
   
-  // 显示下载成功提示
+  
   const notification = document.createElement('div')
   notification.className = 'download-notification'
   notification.textContent = '图像已下载到本地！'
@@ -243,7 +243,7 @@ function downloadImage(){
     <div class="result-decoration-2"></div>
     
     <div class="card result-card p-6 shadow-lg">
-      <!-- 头部 -->
+      
       <div class="d-flex flex-wrap justify-content-between align-items-center mb-6">
         <div>
           <h1 class="result-title">你的心理画像</h1>
@@ -259,16 +259,16 @@ function downloadImage(){
         </div>
       </div>
 
-      <!-- 加载状态 -->
+      
       <div v-if="isLoading" class="loading-container">
         <div class="loading-spinner"></div>
         <p class="text-muted">正在生成你的心理画像...</p>
       </div>
 
-      <!-- 结果内容 -->
+      
       <div v-else class="result-content">
         <div class="row gap-8">
-          <!-- 左侧：类型和描述 -->
+          
           <div class="col-lg-5">
             <div class="personality-card card p-6 shadow-md border-0 bg-white rounded-xl mb-6">
               <div class="type-badge mb-4 inline-block" 
@@ -284,7 +284,6 @@ function downloadImage(){
               </p>
             </div>
 
-            <!-- 维度得分 -->
             <div class="dimensions-card card p-6 shadow-md border-0 bg-white rounded-xl">
               <h3 class="dimensions-title text-lg font-semibold mb-4">维度得分</h3>
               <div class="dimensions-list">
@@ -316,7 +315,7 @@ function downloadImage(){
             </div>
           </div>
 
-          <!-- 右侧：雷达图 -->
+        
           <div class="col-lg-7">
             <div class="chart-card card p-6 shadow-md border-0 bg-white rounded-xl h-full">
               <h3 class="chart-title text-lg font-semibold mb-4">性格维度雷达图</h3>
@@ -331,7 +330,7 @@ function downloadImage(){
           </div>
         </div>
 
-        <!-- 底部建议 -->
+  
         <div class="suggestions-card card p-5 shadow-md border-0 bg-gradient-to-r from-accent/5 to-secondary/5 rounded-xl mt-6">
           <h3 class="suggestions-title text-lg font-semibold mb-3">探索更多</h3>
           <p class="suggestions-text text-muted mb-4">
@@ -451,7 +450,7 @@ function downloadImage(){
   100% { transform: rotate(360deg); }
 }
 
-/* 维度进度条 */
+
 .dimension-rank {
   width: 24px;
   height: 24px;
@@ -467,7 +466,7 @@ function downloadImage(){
   font-weight: 500;
 }
 
-/* 维度列表样式 */
+
 .dimensions-list {
   text-align: center;
 }
@@ -483,7 +482,7 @@ function downloadImage(){
   margin-bottom: 0;
 }
 
-/* 图表容器 */
+
 .chart-container {
   position: relative;
   height: 320px;
@@ -499,7 +498,7 @@ function downloadImage(){
   pointer-events: none;
 }
 
-/* 下载通知 */
+
 :global(.download-notification) {
   position: fixed;
   bottom: 20px;
@@ -520,7 +519,7 @@ function downloadImage(){
   transform: translateY(0);
 }
 
-/* 卡片通用样式 */
+
 .personality-card,
 .dimensions-card,
 .chart-card {
@@ -537,7 +536,7 @@ function downloadImage(){
   box-shadow: 0 15px 35px rgba(0,0,0,0.08);
 }
 
-/* 个性卡片内部元素间距 */
+
 .personality-card > * {
   margin-bottom: 0.75rem;
 }
@@ -546,7 +545,7 @@ function downloadImage(){
   margin-bottom: 0;
 }
 
-/* 维度卡片内部元素间距 */
+
 .dimensions-card > * {
   margin-bottom: 0.75rem;
 }
@@ -555,7 +554,7 @@ function downloadImage(){
   margin-bottom: 0;
 }
 
-/* 图表卡片内部元素间距 */
+
 .chart-card > * {
   margin-bottom: 0.75rem;
 }
@@ -564,7 +563,7 @@ function downloadImage(){
   margin-bottom: 0;
 }
 
-/* 建议卡片内部元素间距 */
+
 .suggestions-card > * {
   margin-bottom: 0.75rem;
   text-align: center;
@@ -574,7 +573,7 @@ function downloadImage(){
   margin-bottom: 0;
 }
 
-/* 响应式设计 */
+
 @media (max-width: 992px) {
   .result-title {
     font-size: 1.75rem;

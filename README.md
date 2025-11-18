@@ -1,24 +1,8 @@
-# test
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+#此项目为NIIT课程Web前端作业项目
+#powered by MindLink 
+ Zephyr 
+ Benson Wang
+ Nova
+ Bill
+ Alexandria
+ Leo

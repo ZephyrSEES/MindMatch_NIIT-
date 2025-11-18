@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const list = ref([])
 onMounted(()=>{
-  // 仅显示当前登录用户的历史记录
+
   const user = JSON.parse(localStorage.getItem('mm_user')||'null')
   const username = user && user.username ? user.username : null
   const all = JSON.parse(localStorage.getItem('mm_history')||'[]') || []
